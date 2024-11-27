@@ -40,6 +40,16 @@ jobs:
           docker build -t $ECR_URL:latest .
           docker push $ECR_URL:latest
 
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: Configure kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
+
       - name: Deploy to EKS
         env:
           ECR_URL: ${{ secrets.ECR_URL }}
