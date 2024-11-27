@@ -37,12 +37,12 @@ jobs:
         env:
           ECR_URL: ${{ secrets.ECR_URL }}
         run: |
-          docker build -t $ECR_URL/sample-app:latest .
-          docker push $ECR_URL/sample-app:latest
+          docker build -t $ECR_URL:latest .
+          docker push $ECR_URL:latest
 
       - name: Deploy to EKS
         env:
           ECR_URL: ${{ secrets.ECR_URL }}
         run: |
           envsubst < deploy.yaml | kubectl apply -f -
-          kubectl apply -f service.yaml
+          kubectl apply -f k8s/service.yaml
