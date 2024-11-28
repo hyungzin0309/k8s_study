@@ -1,6 +1,6 @@
 
-<div align="center">
-<img src="./images/k8s.png" style="width:100%;"></img>
+<div>
+<img src="./images/k8s.png" style="width:700px"></img>
 </div>
 
 ## Kubernetes | K8S
@@ -20,10 +20,58 @@
 
 이 문제를 해결하기 위해 Google은 내부적으로 Borg라는 컨테이너 관리 시스템을 개발했고, 이후 이 기술을 확장하여 Kubernetes라는 오픈소스 프로젝트로 공개했다.
 
+
+## 활용
+
+K8S 활용 기업
+https://kubernetes.io/case-studies/
+- spotify, pinterest, adidas, ...
+
+용도
+- MSA 적용
+
+추세
+- 기존에는 Netflix OSS 많이 사용
+- 현재는 Netflix oss 관련 컴포넌트들이 버전관리가 잘 안되고 있는 문제?
+
+## 배포 구조
+
+![deploy_arch.png](images%2Fdeploy_arch.png)
+- pod 당 container 는 보통 하나.
+- 여러개를 사용하는 경우
+  - sidecar 패턴으로 활용하여 중심 container 를 모니터링하거나 로깅
+    - 애플리케이션 로그를 중앙 시스템(예: Elasticsearch, Fluentd)으로 전송
+  - 어댑터 패턴
+    - 컨테이너에 들어오는 데이터, 밖으로 쏘는 데이터 변환
+
+## 어플리케이션 배포
+
 ## 클러스터 구조
 
-https://velog.io/@hyungzin0309/Kubernetes-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%A1%B0
+https://kubernetes.io/ko/docs/concepts/overview/components/
+1. API Server (kube-apiserver)
+    - Kubernetes의 중심 컴포넌트로, 모든 클라이언트 요청의 진입점 역할을 함
 
-## 어플리케이션 배포 방식
+2. etcd
+    - 클러스터 상태 데이터를 저장하는 분산 키-값 저장소
+    - 예 : deploy 생성 명령이 들어오면 해당 데이터를 etcd 에 먼저 저장 후 워커노드에 전달. 후에 컨트롤러가 etcd 와 노드를 확인하며, 상태가 불일치하는 대상에 대해 일치시키려고 함
 
-## 실무에서의 이슈 (스터디 준비하면서도 만난)
+3. Controller Manager (kube-controller-manager)
+    - 클러스터 상태를 관찰하고, 선언된 상태에 맞게 조정
+    - 여러 컨트롤러의 실행을 담당하는 프로세스.
+        - 	Node Controller: 노드 상태 확인 및 장애 감지
+        - 	Replication Controller: 파드 복제본 유지
+        - 	Endpoint Controller: 서비스와 파드 연결 관리
+        - 	Service Account & Token Controller: API 접근 권한 관리
+
+4. Scheduler (kube-scheduler)
+    - 새로 생성된 파드를 적절한 워커 노드에 배치.
+    - 논리적으로 하나의 deploy 로 묶인 파드들도
+
+
+## 써드파티
+
+## 스터디 준비하면서 이슈
+
+- 도커 이미지 빌드 시 엔진의 CPU 아키텍처 적용
+
