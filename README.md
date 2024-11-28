@@ -38,7 +38,7 @@ https://kubernetes.io/case-studies/
 ## 배포 구조
 
 ![deploy_arch.png](images%2Fdeploy_arch.png)
-- pod 당 container 는 보통 하나.
+- pod 당 container 는 보통 하나
 - 여러개를 사용하는 경우
   - sidecar 패턴으로 활용하여 중심 container 를 모니터링하거나 로깅
     - 애플리케이션 로그를 중앙 시스템(예: Elasticsearch, Fluentd)으로 전송
@@ -59,16 +59,15 @@ https://kubernetes.io/ko/docs/concepts/overview/components/
 
 3. Controller Manager (kube-controller-manager)
     - 클러스터 상태를 관찰하고, 선언된 상태에 맞게 조정
-    - 여러 컨트롤러의 실행을 담당하는 프로세스.
+    - 여러 컨트롤러의 실행을 담당하는 프로세스
         - 	Node Controller: 노드 상태 확인 및 장애 감지
         - 	Replication Controller: 파드 복제본 유지
         - 	Endpoint Controller: 서비스와 파드 연결 관리
         - 	Service Account & Token Controller: API 접근 권한 관리
 
 4. Scheduler (kube-scheduler)
-    - 새로 생성된 파드를 적절한 워커 노드에 배치.
+    - 새로 생성된 파드를 적절한 워커 노드에 배치
     - 논리적으로 하나의 deploy 로 묶인 파드들도
-
 
 ## 써드파티
 

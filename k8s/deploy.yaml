@@ -24,6 +24,6 @@ spec:
             - echo "Sleeping for 5 seconds..."; sleep 5;
       containers:
       - name: spring-boot-app
-        image: ${ECR_URL}:$CURRENT_TIME
+        image: ${ECR_URL}:${CURRENT_TIME}
         ports:
         - containerPort: 8080
