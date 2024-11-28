@@ -4,12 +4,19 @@ on:
   push:
     branches:
       - main
+env:
+  ECR_URL: ${{ secrets.ECR_URL }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Set Current Time
+        id: set_time
+        run: echo "CURRENT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -34,11 +41,9 @@ jobs:
 
 
       - name: Build and Push Docker Image
-        env:
-          ECR_URL: ${{ secrets.ECR_URL }}
         run: |
-          docker build -t $ECR_URL:latest .
-          docker push $ECR_URL:latest
+          docker build -t $ECR_URL:$CURRENT_TIME .
+          docker push $ECR_URL:$CURRENT_TIME
 
       - name: Install kubectl
         run: |
@@ -51,8 +56,6 @@ jobs:
           aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
 
       - name: Deploy to EKS
-        env:
-          ECR_URL: ${{ secrets.ECR_URL }}
         run: |
           envsubst < k8s/deploy.yaml | kubectl apply -f -
           kubectl apply -f k8s/service.yaml
