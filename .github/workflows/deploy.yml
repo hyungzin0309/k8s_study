@@ -15,7 +15,7 @@ jobs:
 
       - name: Set Current Time
         id: set_time
-        run: echo "CURRENT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
+        run: echo "CURRENT_TIME=$(date -u +"%Y%m%dT%H%M%SZ")" >> $GITHUB_ENV
 
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t $ECR_URL:$CURRENT_TIME .
-          docker push $ECR_URL:$CURRENT_TIME
+          docker push $ECR_URL:$$CURRENT_TIME
 
       - name: Install kubectl
         run: |
