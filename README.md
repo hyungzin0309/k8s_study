@@ -29,6 +29,7 @@ https://kubernetes.io/case-studies/
 
 용도
 - MSA 적용
+- 개발, 연구용 (내부)
 
 추세
 - 기존에는 Netflix OSS 많이 사용
