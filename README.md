@@ -71,6 +71,21 @@ https://kubernetes.io/ko/docs/concepts/overview/components/
 
 ## 써드파티
 
+- Helm
+  - 패키지 매니저
+
+- Prometheus + Grafana
+  - 수집 및 모니터링 툴
+
+- ArgoCD
+    - gitops 기반 컨테이너 자동 배포
+    - Jenkins 조합
+
+- LENS
+  - Kubernetes 클러스터를 관리하고 모니터링할 수 있는 데스크톱 GUI 클라이언트
+  - 여러 클러스터를 손쉽게 관리할 수 있도록 직관적인 UI와 다양한 기능을 제공
+  - https://k8slens.dev/
+
 ## 스터디 준비하면서 이슈
 
 - 도커 이미지 빌드 시 엔진의 CPU 아키텍처 적용
