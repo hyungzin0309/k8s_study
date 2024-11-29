@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-app
-  namespace: k8s-study
+  namespace: hjtest
   labels:
     app: spring-boot-app
 spec:

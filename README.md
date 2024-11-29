@@ -38,14 +38,35 @@ https://kubernetes.io/case-studies/
 ## 배포 구조
 
 ![deploy_arch.png](images%2Fdeploy_arch.png)
-- pod 당 container 는 보통 하나
-- 여러개를 사용하는 경우
-  - sidecar 패턴으로 활용하여 중심 container 를 모니터링하거나 로깅
-    - 애플리케이션 로그를 중앙 시스템(예: Elasticsearch, Fluentd)으로 전송
-  - 어댑터 패턴
-    - 컨테이너에 들어오는 데이터, 밖으로 쏘는 데이터 변환
-
+- namespace
+  - app 및 service 를 분리하여 관리하기 위한 테넌트
+- deploy
+  - 하나의 service (논리적 단위)
+- pod
+  - 실제 리소스를 사용하는 단위. 하나, 혹은 다수의 container 로 구성됨
+- container
+  - pod 당 container 는 보통 하나
+  - 여러개를 사용하는 경우
+    - sidecar 패턴으로 활용하여 중심 container 를 모니터링하거나 로깅
+      - 애플리케이션 로그를 중앙 시스템(예: Elasticsearch, Fluentd)으로 전송
+    - 어댑터 패턴
+      - 컨테이너에 들어오는 데이터, 밖으로 쏘는 데이터 변환
+- service
+  - 하나의 deploy 를 대상으로 로드밸런싱 수행
+- ingress
+  - 복잡한 라우팅 규칙 처리
+- volume
+  - pod 에 직접 마운팅
+    - nfs, host path, pvc, ...
+  - pv / pvc
+    - host, nfs 등 다양한 대상 스토리지에 볼륨 마운트 가능
+    - 대상 스토리지는 pv 에서 정의
+    - deploy 대상 스토리지를 추상화한 pvc 에 볼륨 마운트
+    
 ## 어플리케이션 배포
+- 배포된 어플리케이션 확인
+- 어플리케이션 수정
+- yaml 확인
 
 ## 클러스터 구조
 
