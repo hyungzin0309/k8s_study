@@ -23,9 +23,8 @@
 
 ## 활용
 
-K8S 활용 기업
-https://kubernetes.io/case-studies/
-- spotify, pinterest, adidas, ...
+K8S 활용 사례
+- https://kubernetes.io/case-studies/
 
 용도
 - MSA 적용
@@ -64,12 +63,13 @@ https://kubernetes.io/case-studies/
     - deploy 대상 스토리지를 추상화한 pvc 에 볼륨 마운트
     
 ## 어플리케이션 배포
-- 배포된 어플리케이션 확인
+- 배포된 클러스터, 어플리케이션 확인
 - 어플리케이션 수정
-- yaml 확인
+- 배포스크립트, yaml 확인
 
 ## 클러스터 구조
 
+![cluster_arch.png](images%2Fcluster_arch.png)
 https://kubernetes.io/ko/docs/concepts/overview/components/
 1. API Server (kube-apiserver)
     - Kubernetes의 중심 컴포넌트로, 모든 클라이언트 요청의 진입점 역할을 함
